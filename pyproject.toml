@@ -1,0 +1,32 @@
+[project]
+name = "habit-tracker-api"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "A.Rasui", email = "unitkabul@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "alembic>=1.19.1",
+    "fastapi>=0.141.1",
+    "httpx>=0.28.1",
+    "pydantic[email]>=2.13.5",
+    "pydantic-settings>=2.15.0",
+    "pytest>=9.1.1",
+    "python-jose[cryptography]>=3.5.0",
+    "python-multipart>=0.0.32",
+    "sqlalchemy>=2.0.52",
+    "uvicorn>=0.52.4",
+    "fastapi-offline>=1.7.7",
+    "bcrypt>=5.0.0",
+    "psycopg2-binary>=2.9.12",
+]
+
+[project.scripts]
+habit-tracker-api = "habit_tracker_api:main"
+
+
+[build-system]
+requires = ["uv_build>=0.12.8,<0.13.0"]
+build-backend = "uv_build"

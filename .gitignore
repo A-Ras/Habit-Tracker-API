@@ -1,0 +1,24 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Secrets / Umgebungsvariablen (NIEMALS committen!)
+.env
+
+# uv
+.venv/
+test.db
+habit_tracker.db
+*.db
+
+# Caches
+.pytest_cache/
+__pycache__/
+*.pyc

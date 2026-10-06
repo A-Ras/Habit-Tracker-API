@@ -1,0 +1,37 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# uv / virtuelle Umgebungen
+.venv/
+venv/
+
+# Datenbanken (werden im Container neu erstellt)
+*.db
+habit_tracker.db
+test.db
+
+# Tests (optional, kann man auch reinpacken)
+tests/
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+Dockerfile
+.dockerignore

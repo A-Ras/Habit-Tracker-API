@@ -1,0 +1,47 @@
+# Expliziter Projektname (sonst leitet Compose ihn aus dem Verzeichnisnamen ab
+# und der Image-Name würde doppelt "habit-tracker-api-api" lauten)
+name: habit-tracker
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: habit-postgres
+    environment:
+      POSTGRES_USER: habituser
+      POSTGRES_PASSWORD: habitpass
+      POSTGRES_DB: habittracker
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U habituser -d habittracker"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: .
+    # Eigener Image-Name (statt automatisch generiertem "habit-tracker-api-api")
+    image: habit-tracker-api:latest
+    container_name: habit-api
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://habituser:habitpass@db:5432/habittracker
+      SECRET_KEY: dein-super-geheimer-schluessel-12345
+    depends_on:
+      db:
+        condition: service_healthy
+    # Schema-Migrationen vor dem App-Start ausführen (Alembic statt create_all)
+    command: >
+      sh -c "uv run python -m alembic upgrade head &&
+             uv run python -m uvicorn app.main:app --host 0.0.0.0 --port 8000"
+    volumes:
+      - ./db:/app/db  # Falls du später Datei-Uploads machst
+
+volumes:
+  postgres_data:
+    # Bestehendes Volume des alten Projektnamens weiterverwenden (Datenerhalt!)
+    external: true
+    name: habit-tracker-api_postgres_data

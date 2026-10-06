@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    name: Tests (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.14"]
+    env:
+      # Kein .env in CI → SECRET_KEY als Umgebungsvariable setzen
+      SECRET_KEY: ci-test-secret-key-only-for-tests
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: uv installieren (mit Cache)
+        uses: astral-sh/setup-uv@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          enable-cache: true
+
+      - name: Abhängigkeiten installieren
+        run: uv sync --frozen
+
+      - name: Tests ausführen
+        run: uv run pytest
+
+  docker:
+    name: Docker-Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Docker-Image bauen
+        run: docker build -t habit-tracker-api:ci .
