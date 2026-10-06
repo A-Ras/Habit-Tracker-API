@@ -139,4 +139,8 @@ GitHub Actions (`.github/workflows/ci.yml`), ausgelöst bei jedem `push` auf `ma
 ```
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> cc74b89baefc13b21fef30c0e7d09a144eca5ed8
 
