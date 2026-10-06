@@ -22,3 +22,7 @@ habit_tracker.db
 .pytest_cache/
 __pycache__/
 *.pyc
+
+# Documentation
+docs/_build/
+CHANGES_*.md
