@@ -138,8 +138,6 @@ GitHub Actions (`.github/workflows/ci.yml`), ausgelöst bei jedem `push` auf `ma
 └── .github/workflows/     # CI (Tests + Docker-Build)
 ```
 
-## 📝 Änderungsprotokolle
 
-- [`CHANGES_2026-09-08.md`](CHANGES_2026-09-08.md) — Docker-Port-Konflikt & Pydantic-Settings
-- [`CHANGES_2026-10-06.md`](CHANGES_2026-10-06.md) — Alembic-Migrationsworkflow, Port 5433, CI-Einführung
+
 
